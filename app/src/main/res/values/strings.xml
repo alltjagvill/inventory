@@ -1,3 +1,34 @@
 <resources>
     <string name="app_name">Inventory</string>
+
+    <string name="cancel">Cancel</string>
+
+    <string name="email_hint">Email...</string>
+    <string name="password_hint">Password...</string>
+
+    <string name="login_login">LOGIN</string>
+
+    <string name="signup_text">Sign up!</string>
+    <string name="sign_out">Sign out</string>
+    <string name="signup_password_again_hint">Password again...</string>
+
+
+    <string name="empty_email_pass">All fields require inputs!</string>
+    <string name="login_unsuccsessful">Login unsuccsessful! Please try again!</string>
+    <string name="signup_password_missmatch">Password do not match!</string>
+    <string name="check_all_fields">Please check all fields!</string>
+    <string name="something_went_wrong">Something went wrong!</string>
+
+    <string name="create_household_text">Create a household:</string>
+    <string name="skip">Skip!</string>
+    <string name="create">Create!</string>
+    <string name="create_household_explain_text">(You can only have one household that you are responsible for. However, you do not need to create one if you already have a family member already created one you are apart of)</string>
+    <string name="household_name_hint">Household name...</string>
+    <string name="household_address_hint">Household address...</string>
+    <string name="household_name_cant_be_empty">Household name can\'t be empty!</string>
+
+    <string name="menuRooms">Rooms</string>
+
+
+
 </resources>
