@@ -8,4 +8,14 @@
         android:title="@string/menuRooms"
         />
 
+    <item
+        android:id="@+id/action_home"
+        android:icon="@drawable/outline_home_black_48dp"
+        android:title="@string/menuHome"
+        />
+    <item
+        android:id="@+id/action_settings"
+        android:icon="@drawable/ic_menu_black_24dp"
+        android:title="@string/menuSettings"
+        />
 </menu>

@@ -28,7 +28,8 @@
     <string name="household_name_cant_be_empty">Household name can\'t be empty!</string>
 
     <string name="menuRooms">Rooms</string>
-
+    <string name="menuHome">Home</string>
+    <string name="menuSettings">Settings</string>
 
 
 </resources>

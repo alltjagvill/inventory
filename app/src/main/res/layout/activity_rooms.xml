@@ -3,30 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <Button
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/sign_out"
-        android:onClick="LogOut"
-
-        />
-
-<!--    <fragment-->
-<!--        android:id="@+id/startBottomNavBarFragment"-->
-<!--        android:name="com.example.inventory.BottomNavFragment"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        tools:layout="@layout/bottom_menu_fragment"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        />-->
-
-    
+    android:layout_height="match_parent"
+    tools:context=".RoomsActivity">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavStart"
+        android:id="@+id/bottomNavRooms"
         android:layout_alignParentBottom="true"
         app:menu="@menu/bottom_menu"
         android:background="@color/colorPrimary"
