@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_rooms"
+        android:icon="@drawable/outline_meeting_room_black_48dp"
+        android:title="@string/menuRooms" />
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/menuHome" />
+
+    <item
+        android:id="@+id/navigation_settings"
+        android:icon="@drawable/ic_menu_black_24dp"
+        android:title="@string/menuSettings" />
+
+</menu>
