@@ -41,19 +41,17 @@ public class RoomsFragment extends Fragment {
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore firestore;
     private CollectionReference homeCol;
-    private DocumentReference userHomeDoc;
-    //private CollectionReference userHome;
     private CollectionReference userRooms;
-  //  private DocumentReference
-    //private DocumentReference userRooms;
-
+    private DocumentReference userHomeDoc;;
 
     private String userID;
-    private RoomsViewModel roomsViewModel;
+
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
 
     private List<ListRoom> listRooms;
+
+    private RoomsViewModel roomsViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -85,11 +83,8 @@ public class RoomsFragment extends Fragment {
                     Log.d("GetRooms", Integer.toString(task.getResult().getDocuments().size()));
                     for (QueryDocumentSnapshot snapshot : task.getResult())
                     {
-                        Log.d("GetRooms", "ID: " + snapshot.getId());
-                        Log.d("GetRooms", "ID: " + snapshot.getData());
-                        ListRoom room = snapshot.toObject(ListRoom.class);
-                        Log.d("GetRooms", room.getName());
 
+                        ListRoom room = snapshot.toObject(ListRoom.class);
                         listRooms.add(room);
                     }
                 }
@@ -98,16 +93,7 @@ public class RoomsFragment extends Fragment {
                 Log.d("GetRooms", "List size when inside snapshot: " + Integer.toString(listRooms.size()));
             }
         });
-//        for (int i = 0; i < 10; i++)
-//        {
-//            ListRoom room = new ListRoom("Kitchen" + (i + 1), "Milk and everything!");
-//            listRooms.add(room);
-//
-//        }
 
-        Log.d("GetRooms", "List size just before applying adapter: " + Integer.toString(listRooms.size()));
-//        adapter = new RoomListAdapter(getContext(), listRooms);
-//        recyclerView.setAdapter(adapter);
 //        roomsViewModel =
 //                ViewModelProviders.of(this).get(RoomsViewModel.class);
 //
@@ -121,10 +107,9 @@ public class RoomsFragment extends Fragment {
         return root;
     }
 
-    public interface Callbacks
-    {
-        public void onItemSelected(ListRoom room);
-    }
+
+
+
 
 
 }

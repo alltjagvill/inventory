@@ -9,9 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".RoomDetailActivity"></activity>
         <activity
             android:name=".StartActivity"
-            android:label="@string/title_activity_start"></activity>
+            android:label="@string/title_activity_start" />
         <activity android:name=".CreateDefaultHouseHold" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".MainActivity">

@@ -1,7 +1,5 @@
 package com.example.inventory.ui.roomdetail;
 
-import androidx.lifecycle.ViewModelProviders;
-
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,12 +12,12 @@ import android.view.ViewGroup;
 
 import com.example.inventory.R;
 
-public class RoomDetail extends Fragment {
+public class RoomDetailFragment extends Fragment {
 
     private RoomDetailViewModel mViewModel;
 
-    public static RoomDetail newInstance() {
-        return new RoomDetail();
+    public static RoomDetailFragment newInstance() {
+        return new RoomDetailFragment();
     }
 
     @Override
