@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.example.inventory.Adapter.InventoryListAdapter;
 import com.example.inventory.Model.ListItem;
 import com.example.inventory.Model.ListRoom;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
@@ -24,7 +26,9 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class RoomDetailActivity extends AppCompatActivity {
 
@@ -39,13 +43,18 @@ public class RoomDetailActivity extends AppCompatActivity {
     private String userID;
     private String roomID;
 
+
     private TextView roomNameTextview;
     private TextView roomDescriptionTextview;
+
+
     private RecyclerView inventoryListRecyclerview;
     private RecyclerView.Adapter adapter;
 
     private String roomNameString;
     private String roomDescriptionString;
+
+    ListRoom room;
 
     private List<ListItem> inventoryItemList;
 
@@ -56,7 +65,7 @@ public class RoomDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room_detail);
 
-        ListRoom room = (ListRoom) getIntent().getSerializableExtra("ROOMOBJECT");
+        room = (ListRoom) getIntent().getSerializableExtra("ROOMOBJECT");
 
         roomNameString = room.getName();
         roomDescriptionString = room.getDescription();
@@ -72,6 +81,7 @@ public class RoomDetailActivity extends AppCompatActivity {
 
         roomNameTextview = findViewById(R.id.roomRoomName);
         roomDescriptionTextview = findViewById(R.id.roomRoomDescription);
+
         inventoryListRecyclerview = findViewById(R.id.roomRoomInventory);
         inventoryListRecyclerview.setHasFixedSize(true);
         inventoryListRecyclerview.setLayoutManager(new LinearLayoutManager(this));
@@ -94,12 +104,16 @@ public class RoomDetailActivity extends AppCompatActivity {
                 {
                     for (QueryDocumentSnapshot documentSnapshot : task.getResult())
                     {
-                        ListItem item = documentSnapshot.toObject(ListItem.class);
+                        final ListItem item = documentSnapshot.toObject(ListItem.class);
 
                         inventoryItemList.add(item);
-                        AddItemToList(item);
+                       // AddItemToList(item);
                         Log.d("AddingItems", "Name: " + item.getItemName());
                         Log.d("AddingItems", "Name: " + item.getItemID());
+
+
+
+
                     }
                     Log.d("AddingItems", Integer.toString(inventoryItemList.size()));
 
@@ -112,15 +126,17 @@ public class RoomDetailActivity extends AppCompatActivity {
 
                         AddItemCount(item);
 
-
                     }
 
                     @Override
-                    public void removeItemCountOnClick(View v, int position) {
+                    public void removeItemCountOnClick(View v, int position, ListItem item) {
+
+                        RemoveItemCount(item);
 
                     }
                 });
                 inventoryListRecyclerview.setAdapter(adapter);
+                //adapter.notifyDataSetChanged();
 
             }
 
@@ -146,23 +162,86 @@ public class RoomDetailActivity extends AppCompatActivity {
     public void AddItem(View view)
     {
         Toast.makeText(this, "Item Added!", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, AddItemActivity.class);
+        intent.putExtra("ROOMOBJECT", room);
+        startActivity(intent);
     }
 
     public void AddItemCount(ListItem item)
     {
-        Log.d("Hej", item.getItemName());
+
+
+        Map<String, Object> updateItem = new HashMap<>();
+
+        int itemCount = item.getItemCount() + 1;
+        item.setItemCount(itemCount);
+
+        if(itemCount > item.getItemCritical() && item.getTobuy())
+
+            {
+                item.setTobuy(false);
+                updateItem.put("toBuy", false);
+            }
+
+        updateItem.put("itemCount", item.getItemCount());
+
+        firestore.collection("homes").document(userID).collection("items").document(item.getItemID()).update(updateItem).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+              Log.d("Add item count", "Works");
+              adapter.notifyDataSetChanged();
+            }
+        });
+
+
+
 
         //OnCompleteListerner on document where itemID is this ItemsID
 
         //Check if itemCount =< criticalCount
     }
 
-    public void RemoveItemCount(View view)
-    {
-        Toast.makeText(this, "Item Removed!", Toast.LENGTH_SHORT).show();
+    public void RemoveItemCount(ListItem item) {
+        if (item.getItemCount() > 0) {
+            Map<String, Object> updateItem = new HashMap<>();
+
+            int itemCount = item.getItemCount() - 1;
+
+
+            item.setItemCount(itemCount);
+
+//            Log.d("RemoveFromCount", "ItemCount: " + item.getItemCount());
+//            Log.d("RemoveFromCount", "CriticalCount: " + item.getItemCritical());
+//            Log.d("RemoveFromCountB", "Set toBuy to: " + item.getTobuy());
+
+            if (item.getItemCount() <= item.getItemCritical() && !item.getTobuy()) {
+
+                item.setTobuy(true);
+                updateItem.put("toBuy", true);
+              //  Log.d("RemoveFromCountA", "Set toBuy to: " + item.getTobuy());
+            }
+
+            updateItem.put("itemCount", item.getItemCount());
+
+            firestore.collection("homes").document(userID).collection("items").document(item.getItemID()).update(updateItem).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Log.d("Add item count", "Works");
+                    adapter.notifyDataSetChanged();
+                }
+            });
+        }
+
+
+
     }
 
-    private void AddItemToList(ListItem item)
+    public void GoBack(View view)
+    {
+        onBackPressed();
+    }
+
+    private void AddItemToList (ListItem item)
     {
         Log.d("Item", item.getItemName());
         itemListHolder.add(item);

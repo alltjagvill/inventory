@@ -37,5 +37,18 @@
 
     <string name="change_me">Change me...</string>
 
+    <string name="edit_item">Edit item:</string>
+    <string name="name">Name: </string>
+    <string name="critical_threshold">Threshold: </string>
+    <string name="critical_threshold_explained">(The amount in your inventory when you should be noticed that you need to buy it)</string>
+    <string name="delete">Delete: </string>
+    <string name="delete_explain">(Type delete and then press delete button to delete item)</string>
+    <string name="delete_button_text">Delete</string>
+    <string name="delete_text">delete</string>
+    <string name="need_text_delete">You need to put "delete" (without the quotes) into the delete field</string>
+    <string name="add_item">Add item:</string>
+    <string name="item_added">Item added!</string>
+    <string name="item_deleted">Item deleted!</string>
+
 
 </resources>

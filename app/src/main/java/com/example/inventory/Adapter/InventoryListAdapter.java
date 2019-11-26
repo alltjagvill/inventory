@@ -1,6 +1,7 @@
 package com.example.inventory.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +14,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.inventory.EditItemActivity;
 import com.example.inventory.Model.ListItem;
+import com.example.inventory.Model.ListRoom;
 import com.example.inventory.R;
+import com.example.inventory.RoomDetailActivity;
 
 import java.util.List;
 
@@ -82,28 +86,38 @@ public class InventoryListAdapter extends RecyclerView.Adapter<InventoryListAdap
                     ListItem item = listItems.get(getAdapterPosition());
                     onClickListener.addItemCountOnclick(v, getAdapterPosition(), item);
 
+
                 }
             });
 
             removeItemCountButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    ListItem item = listItems.get(getAdapterPosition());
+                    onClickListener.removeItemCountOnClick(v, getAdapterPosition(), item);
                 }
             });
+
+
 
         }
 
         @Override
         public void onClick(View v) {
-            Toast.makeText(context, "Item Clicked!", Toast.LENGTH_SHORT).show();
+            int position = getAdapterPosition();
+
+            ListItem item = listItems.get(position);
+            Log.d("ItemClicked", "Item: " + item.getItemName());
+            Intent intent = new Intent(context, EditItemActivity.class);
+            intent.putExtra("ITEMOBJECT", item);
+            context.startActivity(intent);
         }
     }
 
     public interface InventoryListAdapterListener
     {
         void addItemCountOnclick(View v, int position, ListItem item);
-        void removeItemCountOnClick(View v, int position);
+        void removeItemCountOnClick(View v, int position, ListItem item);
     }
 
 }
