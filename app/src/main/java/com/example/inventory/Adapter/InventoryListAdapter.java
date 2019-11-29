@@ -111,6 +111,8 @@ public class InventoryListAdapter extends RecyclerView.Adapter<InventoryListAdap
             Intent intent = new Intent(context, EditItemActivity.class);
             intent.putExtra("ITEMOBJECT", item);
             context.startActivity(intent);
+
+
         }
     }
 

@@ -48,10 +48,11 @@ public class StartActivity extends AppCompatActivity {
 
 
 
-    public void switchFragment(int id, Fragment fragment)
+
+
+    public void AddRoom(View view)
     {
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(id, fragment);
-        fragmentTransaction.commit();
+        Intent intent = new Intent(this, AddRoomActivity.class);
+        startActivity(intent);
     }
 }

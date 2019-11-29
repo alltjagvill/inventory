@@ -66,6 +66,8 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ViewHo
         @Override
         public void onClick(View v) {
 
+
+
         }
     }
 

@@ -49,6 +49,9 @@
     <string name="add_item">Add item:</string>
     <string name="item_added">Item added!</string>
     <string name="item_deleted">Item deleted!</string>
+    <string name="add_room">Add room:</string>
+    <string name="description">Description:</string>
+    <string name="room_added">Room added!</string>
 
 
 </resources>
